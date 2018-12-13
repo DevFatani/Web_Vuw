@@ -1,0 +1,17 @@
+name: web_vuw
+description: A Web View for flutter
+version: 0.1.0
+author: Muhammad Fatani <DevFatani@outlook.com>
+homepage:
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+flutter:
+  plugin:
+    androidPackage: com.devfatani.webvuw
+    pluginClass: WebVuwPlugin

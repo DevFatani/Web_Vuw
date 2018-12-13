@@ -1,0 +1,103 @@
+# web_vuw
+
+Plugin that can embedded web view with flutter widgets.
+
+<a href="https://imgflip.com/gif/2ovgcw"><img src="https://i.imgflip.com/2ovgcw.gif" title="made at imgflip.com"/></a>
+
+
+### NOTE: For iOS you need to put the key => ```io.flutter.embedded_views_preview```   and the value ``` YES ``` in ```Info.plist``` 
+
+## How it works
+See Full example in [example] folder
+
+`Basic`
+```dart
+    new WebVuw(
+        initialUrl: 'www.url.com',
+        enableJavascript: true,
+        header: {
+            .....
+        }
+        userAgent: 'userAgent',
+        gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
+            Factory<OneSequenceGestureRecognizer>(
+                () => EagerGestureRecognizer(),
+            ),
+        ].toSet(),
+        javaScriptMode: JavaScriptMode.unrestricted,
+        onWebViewCreated: (WebVuwController webViewController) {
+            _controller.complete(webViewController);
+        }
+    )
+```
+
+
+# Listen to webview events
+
+## First 1️⃣ 👇🏻
+```dart
+
+    ...
+    StreamSubscription _ssWebVuwEvents;
+    ...
+    @override
+    Widget build(BuildContext context) {
+        return FutureBuilder<WebVuwController>(
+        future: _controller.future,
+        builder:
+            (BuildContext context, AsyncSnapshot<WebVuwController> snapshot) {
+            final webViewReady = 
+                snapshot.connectionState == ConnectionState.done;
+            final controller = snapshot.data;
+
+            if (webViewReady) {
+                <!-- You can now call the functions -->
+                <!-- controller.stopLoading() -->
+                _ssWebVuwEvents = controller.onEvents().listen((events) {
+                    print('Events 😎=> $events');
+                });
+            }
+    ...
+```
+
+
+## Second 2️⃣ 👇🏻
+```dart
+    @override
+    void dispose() {
+        if (_ssWebVuwEvents != null) _ssWebVuwEvents.cancel();
+        super.dispose();
+    }
+    ..
+```
+
+# Functions 👨🏻‍💻
+
+```dart
+Future<void> loadUrl(String url);
+```
+```dart
+Future<bool> canGoBack();
+```
+```dart
+Future<bool> canGoForward();
+```
+```dart
+Future<void> goBack();
+```
+```dart
+Future<void> goForward();
+```
+```dart
+Future<void> stopLoading();
+```
+```dart
+Future<Boolean> hasForward();
+```
+```dart
+Future<Boolean> forward();
+```
+
+```dart
+Stream onEvents;
+```
