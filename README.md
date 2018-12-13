@@ -2,13 +2,24 @@
 
 Plugin that can embedded web view with flutter widgets.
 
-<a href="https://imgflip.com/gif/2ovgcw"><img src="https://i.imgflip.com/2ovgcw.gif" title="made at imgflip.com"/></a>
+<a href="https://imgflip.com/gif/2ovgcw"><img src="https://i.imgflip.com/2ovgcw.gif" /></a>
 
 
 ### NOTE: For iOS you need to put the key => ```io.flutter.embedded_views_preview```   and the value ``` YES ``` in ```Info.plist``` 
 
+## To use this plugin:
+* add the dependency to your [pubspec.yaml](https://github.com/DevFatani/Web_Vuw/blob/master/pubspec.yaml) file.
+
+
+```yaml
+    dependencies:
+       flutter:
+        sdk: flutter
+       web_vuw:
+```
+
 ## How it works
-See Full example in [example] folder
+See Full example in [example](https://github.com/DevFatani/Web_Vuw/blob/master/example/lib/main.dart)
 
 `Basic`
 ```dart
@@ -37,9 +48,9 @@ See Full example in [example] folder
 ## First 1️⃣ 👇🏻
 ```dart
 
-    ...
+//    ...
     StreamSubscription _ssWebVuwEvents;
-    ...
+
     @override
     Widget build(BuildContext context) {
         return FutureBuilder<WebVuwController>(
@@ -51,8 +62,8 @@ See Full example in [example] folder
             final controller = snapshot.data;
 
             if (webViewReady) {
-                <!-- You can now call the functions -->
-                <!-- controller.stopLoading() -->
+                // You can now call the functions
+                // controller.stopLoading();
                 _ssWebVuwEvents = controller.onEvents().listen((events) {
                     print('Events 😎=> $events');
                 });

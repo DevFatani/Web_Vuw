@@ -2,7 +2,7 @@ name: web_vuw
 description: A Web View for flutter
 version: 0.1.0
 author: Muhammad Fatani <DevFatani@outlook.com>
-homepage:
+homepage: https://github.com/DevFatani/Web_Vuw
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
