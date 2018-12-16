@@ -3,6 +3,8 @@ package com.devfatani.webvuw
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.view.View
 import android.webkit.WebView
 import io.flutter.plugin.common.BinaryMessenger
@@ -14,6 +16,7 @@ import io.flutter.plugin.platform.PlatformView
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.webkit.WebResourceRequest
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import io.flutter.plugin.common.EventChannel
@@ -29,26 +32,28 @@ class WebVuw internal constructor(
         SwipeRefreshLayout.OnRefreshListener,
         EventChannel.StreamHandler {
 
-    val TAG = "WebVuw"
+    companion object {
+        const val TAG = "WebVuw"
 
-    //PRAMS NAME
-    val INITIAL_URL = "initialUrl"
-    val HEADER = "header"
-    val USER_AGENT = "userAgent"
-    val CHANNEL_NAME = "plugins.devfatani.com/web_vuw_"
-    val WEB_VUW_EVENT = "web_vuw_events_"
-    val EVENT = "event"
-    val URL = "url"
-    val ENABLE_JAVA_SCRIPT = "enableJavascript"
-    val ENABLE_LOCAL_STORAGE = "enableLocalStorage"
+        //PRAMS NAME
+        const val INITIAL_URL = "initialUrl"
+        const val HEADER = "header"
+        const val USER_AGENT = "userAgent"
+        const val CHANNEL_NAME = "plugins.devfatani.com/web_vuw_"
+        const val WEB_VUW_EVENT = "web_vuw_events_"
+        const val EVENT = "event"
+        const val URL = "url"
+        const val ENABLE_JAVA_SCRIPT = "enableJavascript"
+        const val ENABLE_LOCAL_STORAGE = "enableLocalStorage"
 
-    //METHOD NAME
-    val LOAD_URL = "loadUrl"
-    val CAN_GO_BACK = "canGoBack"
-    val CAN_GO_FORWARD = "canGoForward"
-    val GO_BACK = "goBack"
-    val GO_FORWARD = "goForward"
-    val STOP_LOADING = "stopLoading"
+        //METHOD NAME
+        const val LOAD_URL = "loadUrl"
+        const val CAN_GO_BACK = "canGoBack"
+        const val CAN_GO_FORWARD = "canGoForward"
+        const val GO_BACK = "goBack"
+        const val GO_FORWARD = "goForward"
+        const val STOP_LOADING = "stopLoading"
+    }
 
     private val linearLay = LinearLayout(context)
 
@@ -100,6 +105,19 @@ class WebVuw internal constructor(
                         }
                         self.eventSinkNavigation!!.success(result)
                     }
+                }
+
+                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                    if (request != null && self.eventSinkNavigation != null) {
+                        val nxtUrl = request.url.toString()
+                        val result = HashMap<String, String>().apply {
+                            put(EVENT, "shouldOverrideUrlLoading")
+                            put(URL, nxtUrl)
+                        }
+                        self.eventSinkNavigation!!.success(result)
+                    }
+                    return super.shouldOverrideUrlLoading(view, request)
                 }
             }
 
@@ -185,5 +203,6 @@ class WebVuw internal constructor(
     }
 
     override fun onCancel(p0: Any?) {
+
     }
 }
