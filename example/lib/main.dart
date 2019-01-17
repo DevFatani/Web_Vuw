@@ -14,7 +14,7 @@ class Example extends StatefulWidget {
 class _ExampleState extends State<Example> {
   final Completer<WebVuwController> _controller = Completer<WebVuwController>();
   StreamSubscription _ssWebVuwEvents;
-  String _loadUrl = 'https://unsplash.com/public-domain-images';
+  String _loadUrl = 'https:/flutter.io';
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
