@@ -127,6 +127,7 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     
     @objc func reloadWebView(){
         self.refController.endRefreshing()
+        self.wkWebVuw.reload()
     }
     
     
