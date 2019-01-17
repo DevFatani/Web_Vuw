@@ -1,10 +1,10 @@
 # web_vuw
 
-#### A Plugin that can embedded web view with flutter widgets.
+### A Plugin that can embedded web view with flutter widgets.
 
 
 # Demo
-![alt-text-1](assets/demo.gif "demo")
+![alt-text-1](https://media.giphy.com/media/BpaE1Jx8UvLWuVX18v/giphy.gif "demo")
 
 #### NOTE: For iOS you need to put the key => ```io.flutter.embedded_views_preview```   and the value ``` YES ``` in ```Info.plist``` 
 
