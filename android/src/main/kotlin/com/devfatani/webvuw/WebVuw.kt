@@ -1,6 +1,5 @@
 package com.devfatani.webvuw
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
@@ -15,12 +14,20 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformView
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.webkit.WebResourceRequest
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
 import io.flutter.plugin.common.EventChannel
 
+
+enum class FlutterMethodName {
+    loadUrl,
+    canGoBack,
+    canGoForward,
+    goBack,
+    goForward,
+    stopLoading,
+}
 
 class WebVuw internal constructor(
         context: Context,
@@ -45,14 +52,6 @@ class WebVuw internal constructor(
         const val URL = "url"
         const val ENABLE_JAVA_SCRIPT = "enableJavascript"
         const val ENABLE_LOCAL_STORAGE = "enableLocalStorage"
-
-        //METHOD NAME
-        const val LOAD_URL = "loadUrl"
-        const val CAN_GO_BACK = "canGoBack"
-        const val CAN_GO_FORWARD = "canGoForward"
-        const val GO_BACK = "goBack"
-        const val GO_FORWARD = "goForward"
-        const val STOP_LOADING = "stopLoading"
     }
 
     private val linearLay = LinearLayout(context)
@@ -66,6 +65,7 @@ class WebVuw internal constructor(
     init {
         if (params.containsKey(INITIAL_URL)) {
             val initialURL = params[INITIAL_URL] as String
+
 
             if (params[HEADER] != null) {
                 val header = params[HEADER] as Map<String, String>
@@ -130,11 +130,6 @@ class WebVuw internal constructor(
             swipeRefresh.addView(webVuw)
             swipeRefresh.setOnRefreshListener(this@WebVuw)
 
-//            SHOW Keyboard
-//            (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
-//                toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-//            }
-
             EventChannel(messenger, "$WEB_VUW_EVENT$id").setStreamHandler(this@WebVuw)
         }
 
@@ -147,14 +142,13 @@ class WebVuw internal constructor(
     }
 
     override fun onMethodCall(methodCall: MethodCall, result: Result) {
-        when (methodCall.method) {
-            LOAD_URL -> loadUrl(methodCall, result)
-            CAN_GO_BACK -> canGoBack(methodCall, result)
-            CAN_GO_FORWARD -> canGoForward(methodCall, result)
-            GO_BACK -> goBack(methodCall, result)
-            GO_FORWARD -> goForward(methodCall, result)
-            STOP_LOADING -> stopLoading(methodCall, result)
-            else -> result.notImplemented()
+        when (FlutterMethodName.valueOf(methodCall.method)) {
+            FlutterMethodName.loadUrl -> loadUrl(methodCall, result)
+            FlutterMethodName.canGoBack -> canGoBack(methodCall, result)
+            FlutterMethodName.canGoForward -> canGoForward(methodCall, result)
+            FlutterMethodName.goBack -> goBack(methodCall, result)
+            FlutterMethodName.goForward -> goForward(methodCall, result)
+            FlutterMethodName.stopLoading -> stopLoading(methodCall, result)
         }
     }
 

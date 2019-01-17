@@ -1,6 +1,16 @@
 import Flutter
 import UIKit
 import WebKit
+
+enum FlutterMethodName: String {
+    case loadUrl
+    case canGoBack
+    case canGoForward
+    case goBack
+    case goForward
+    case stopLoading
+}
+
 public class WebVuwFactory : NSObject, FlutterPlatformViewFactory {
     
     var messenger: FlutterBinaryMessenger!
@@ -36,20 +46,13 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     let ENABLE_LOCAL_STORAGE = "enableLocalStorage"
     
     
-    //METHOD NAME
-    let LOAD_URL = "loadUrl"
-    let CAN_GO_BACK = "canGoBack"
-    let CAN_GO_FORWARD = "canGoForward"
-    let GO_BACK = "goBack"
-    let GO_FORWARD = "goForward"
-    let STOP_LOADING = "stopLoading"
     
     fileprivate var viewId:Int64!;
     fileprivate var wkWebVuw: WKWebView!
     fileprivate var channel: FlutterMethodChannel!
     fileprivate var refController: UIRefreshControl!
     fileprivate var eventSinkNavigation: FlutterEventSink?;
-
+    
     public init(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?, binaryMessenger: FlutterBinaryMessenger) {
         super.init()
         
@@ -132,19 +135,21 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     
     
     func onMethodCall(call: FlutterMethodCall, result: @escaping FlutterResult) {
-        let method = call.method
-        if method == LOAD_URL {
-            self.onLoadURL(call, result)
-        }else if method == CAN_GO_BACK{
-            self.onCanGoBack(call, result)
-        }else  if method == CAN_GO_FORWARD {
-            self.onCanGoForward(call, result)
-        }else  if method == GO_BACK {
-            self.onGoBack(call, result)
-        }else  if method == GO_FORWARD {
-            self.onGoForward(call, result)
-        }else if method == STOP_LOADING {
-            self.onStopLoading(call, result)
+        if let method = FlutterMethodName(rawValue: call.method) {
+            switch method {
+            case .loadUrl:
+                onLoadURL(call, result)
+            case .canGoBack:
+                onCanGoBack(call, result)
+            case .canGoForward:
+                onCanGoForward(call, result)
+            case .goBack:
+                onGoBack(call, result)
+            case .goForward:
+                onGoForward(call, result)
+            case .stopLoading:
+                onStopLoading(call, result)
+            }
         }
     }
     
@@ -238,7 +243,7 @@ extension WebVuwController : WKNavigationDelegate {
             decisionHandler(.allow)
         }
     }
-
-
+    
+    
 }
 
