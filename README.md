@@ -1,6 +1,18 @@
 # web_vuw
 
-### A Plugin that can embedded web view with flutter widgets.
+### A plugin that can embedded (web view) with flutter widgets.
+
+### The web view on iOS support by [wkwebview](https://developer.apple.com/documentation/webkit/wkwebview)
+
+### The web view on Android support by [WebView](https://developer.android.com/reference/android/webkit/WebView)
+### 📣 important note: Android keyboard cannot be appear according to this flutter issue [19718](https://github.com/flutter/flutter/issues/19718) 
+
+# support
+    Can embedded in widget tree ✅
+    Pull to refresh ✅
+    Add header ✅
+    Add userAgent ✅
+    Can handl all webview callback method ✅
 
 
 # Demo
