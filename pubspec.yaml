@@ -1,6 +1,6 @@
 name: web_vuw
-description: A Web View for flutter
-version: 0.1.5
+description: A plugin that can embedded (web view) with flutter widgets tree, support from native web views
+version: 0.1.6
 author: Muhammad Fatani <DevFatani@outlook.com>
 homepage: https://github.com/DevFatani/Web_Vuw
 
