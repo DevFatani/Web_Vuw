@@ -14,6 +14,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformView
 import android.support.v4.widget.SwipeRefreshLayout
 import android.view.ViewGroup
+import android.webkit.ValueCallback
 import android.webkit.WebResourceRequest
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
@@ -27,6 +28,8 @@ enum class FlutterMethodName {
     goBack,
     goForward,
     stopLoading,
+    evaluateJavascript,
+    reload
 }
 
 class WebVuw internal constructor(
@@ -149,17 +152,30 @@ class WebVuw internal constructor(
             FlutterMethodName.goBack -> goBack(methodCall, result)
             FlutterMethodName.goForward -> goForward(methodCall, result)
             FlutterMethodName.stopLoading -> stopLoading(methodCall, result)
+            FlutterMethodName.evaluateJavascript -> evaluateJavaScript(methodCall, result)
+            FlutterMethodName.reload -> reload(methodCall, result)
         }
     }
 
-    private fun stopLoading(methodCall: MethodCall, result: Result) {
-        webVuw.stopLoading()
-        result.success(null)
+    private fun evaluateJavaScript(methodCall: MethodCall, result: Result) {
+        val jsString = methodCall.arguments as String
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webVuw.evaluateJavascript(jsString) { value -> result.success(value) }
+        }
     }
 
     private fun loadUrl(methodCall: MethodCall, result: Result) {
         val url = methodCall.arguments as String
         webVuw.loadUrl(url)
+        result.success(null)
+    }
+
+    private fun reload(methodCall: MethodCall, result: Result) {
+        webVuw.reload()
+    }
+
+    private fun stopLoading(methodCall: MethodCall, result: Result) {
+        webVuw.stopLoading()
         result.success(null)
     }
 

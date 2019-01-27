@@ -9,6 +9,8 @@ enum FlutterMethodName: String {
     case goBack
     case goForward
     case stopLoading
+    case evaluateJavascript
+    case reload
 }
 
 public class WebVuwFactory : NSObject, FlutterPlatformViewFactory {
@@ -149,10 +151,27 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
                 onGoForward(call, result)
             case .stopLoading:
                 onStopLoading(call, result)
+            case .evaluateJavascript:
+               onEvaluateJavascript(call, result)
+            case .reload:
+                reload(call, result)
             }
         }
     }
     
+    
+    func onEvaluateJavascript(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        if let jsString = call.arguments as? String  {
+            wkWebVuw.evaluateJavaScript(jsString) { (evaluateResult, error) in
+                if error != nil {
+                    result(FlutterError(code: "javascribt_faild", message: "Failed evaluating JavaScript Code.", details: "Your [js code] was: \(jsString)"))
+
+                }else if let res =  evaluateResult as? String {
+                    result(res)
+                }
+            }
+        }
+    }
     
     func onLoadURL(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         if let url = call.arguments as? String  {
@@ -166,7 +185,7 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     
     func load(url:String)-> Bool {
         if let urlRequest = URL(string: url) {
-            self.wkWebVuw.load(URLRequest(url: urlRequest))
+            wkWebVuw.load(URLRequest(url: urlRequest))
             return true
         }
         return false
@@ -175,6 +194,11 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     func onCanGoBack(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         let canGoBack = wkWebVuw.canGoBack
         result([NSNumber(booleanLiteral: canGoBack)])
+    }
+    
+    
+    func reload(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        wkWebVuw.reload()
     }
     
     func onCanGoForward(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
