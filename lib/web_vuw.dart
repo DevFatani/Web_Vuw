@@ -46,11 +46,11 @@ class WebVuwController {
     return _channel.invokeMethod("goForward");
   }
 
-  stopLoading() async {
+  Future<void> stopLoading() async {
     return _channel.invokeMethod("stopLoading");
   }
 
-  reload() async {
+  Future<void> reload() async {
     return _channel.invokeMethod("reload");
   }
 
