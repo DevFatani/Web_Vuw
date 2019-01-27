@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:web_vuw/web_vuw.dart';
+import 'package:web_vuw_example/popup_screen.dart';
 
 void main() => runApp(MaterialApp(home: Example()));
 
@@ -46,9 +47,18 @@ class _ExampleState extends State<Example> {
                   },
                 ),
                 IconButton(
+                  icon: Icon(Icons.palette),
+                  onPressed: () async {
+                    final controller = await _controller.future;
+                    final result = await controller.evaluateJavascript(
+                        'document.body.style.backgroundColor = \'cyan\'');
+                    print('result -> $result');
+                  },
+                ),
+                IconButton(
                     icon: Icon(Icons.thumb_up),
                     onPressed: () {
-                      popupScreen(PopupScreen());
+                      popupScreen(PopupScreen(), context);
                     })
               ]),
           body: WebVuw(
@@ -57,7 +67,7 @@ class _ExampleState extends State<Example> {
             userAgent: 'userAgent',
             gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
               Factory<OneSequenceGestureRecognizer>(
-                    () => EagerGestureRecognizer(),
+                () => EagerGestureRecognizer(),
               ),
             ].toSet(),
             javaScriptMode: JavaScriptMode.unrestricted,
@@ -79,25 +89,6 @@ class _ExampleState extends State<Example> {
         backgroundColor: Colors.green,
       ));
 
-  popupScreen(Widget screen) => Navigator.push(
-      context,
-      PageRouteBuilder(
-          opaque: false,
-          pageBuilder: (BuildContext context, _, __) => screen,
-          transitionsBuilder: (
-            BuildContext context,
-            Animation<double> animation,
-            Animation<double> secondaryAnimation,
-            Widget child,
-          ) =>
-              SlideTransition(
-                position: Tween<Offset>(
-                  begin: Offset(0.0, 1.0),
-                  end: Offset.zero,
-                ).animate(animation),
-                child: child, // child is the value returned by pageBuilder
-              )));
-
   @override
   void dispose() {
     if (_ssWebVuwEvents != null) _ssWebVuwEvents.cancel();
@@ -105,44 +96,21 @@ class _ExampleState extends State<Example> {
   }
 }
 
-class PopupScreen extends StatefulWidget {
-  @override
-  createState() => _PopupScreenState();
-}
-
-class _PopupScreenState extends State<PopupScreen> {
-  double boxWidth;
-  double boxHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.black12,
-        body: Stack(
-          children: <Widget>[
-            InkWell(
-              onTap: () => Navigator.of(context).pop(),
-              child: null,
-            ),
-            Center(
-              child: Container(
-                width: boxWidth,
-                height: boxHeight,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(5.5)),
-                child: SizedBox(
-                  width: 250,
-                  height: 250,
-                  child: Center(
-                      child: Text(
-                    "Hello this Web Vuw",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  )),
-                ),
-              ),
-            ),
-          ],
-        ));
-  }
-}
+popupScreen(Widget screen, BuildContext context) => Navigator.push(
+    context,
+    PageRouteBuilder(
+        opaque: false,
+        pageBuilder: (BuildContext context, _, __) => screen,
+        transitionsBuilder: (
+          BuildContext context,
+          Animation<double> animation,
+          Animation<double> secondaryAnimation,
+          Widget child,
+        ) =>
+            SlideTransition(
+              position: Tween<Offset>(
+                begin: Offset(0.0, 1.0),
+                end: Offset.zero,
+              ).animate(animation),
+              child: child, // child is the value returned by pageBuilder
+            )));
