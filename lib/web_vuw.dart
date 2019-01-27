@@ -50,10 +50,19 @@ class WebVuwController {
     return _channel.invokeMethod("stopLoading");
   }
 
+  reload() async {
+    return _channel.invokeMethod("reload");
+  }
+
+  Future<dynamic> evaluateJavascript(String javascriptString) async {
+    final result =
+        await _channel.invokeMethod('evaluateJavascript', javascriptString);
+    return result;
+  }
+
   Future<void> _updateSettings(Map<String, dynamic> update) async {
     return _channel.invokeMethod('updateSettings', update);
   }
-
 
   Stream onEvents() {
     return _webVuwEvents.receiveBroadcastStream();
