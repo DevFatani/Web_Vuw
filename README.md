@@ -16,6 +16,7 @@
    > * Add header ✅
    > * Add userAgent ✅
    > * Can handl all webview callback method ✅
+   > * Can call evaluateJavascript ✅
 
 
 # Demo
@@ -118,11 +119,17 @@ Future<void> goForward();
 ```dart
 Future<void> stopLoading();
 ```
+
 ```dart
-Future<Boolean> hasForward();
+Future<void> reload();
 ```
+
 ```dart
-Future<Boolean> forward();
+Future<void> forward();
+```
+
+```dart
+Future<dynamic> evaluateJavascript(String javascriptString);
 ```
 
 ```dart
