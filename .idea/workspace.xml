@@ -10,13 +10,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9648bc63-13ea-4443-ad26-cfd25240a16a" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/example/lib/popup_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/lib/popup_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/ios/Classes/SwiftWebVuwPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/ios/Classes/SwiftWebVuwPlugin.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/lib/web_vuw.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/lib/web_vuw.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/web_vuw/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftWebVuwPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftWebVuwPlugin.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/web_vuw.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/web_vuw.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
@@ -35,60 +45,67 @@
     <session id="1286359827">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.1" value="1" />
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.1" value="3" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="dart" value="4" />
-          <entry key="h" value="1" />
-          <entry key="m" value="1" />
-          <entry key="md" value="1" />
-          <entry key="swift" value="3" />
-          <entry key="yaml" value="2" />
+          <entry key="LICENSE" value="2" />
+          <entry key="Podfile" value="1" />
+          <entry key="dart" value="13" />
+          <entry key="flutter-plugins" value="1" />
+          <entry key="gitignore" value="4" />
+          <entry key="h" value="3" />
+          <entry key="iml" value="3" />
+          <entry key="json" value="1" />
+          <entry key="kt" value="3" />
+          <entry key="lock" value="4" />
+          <entry key="m" value="3" />
+          <entry key="md" value="6" />
+          <entry key="metadata" value="2" />
+          <entry key="packages" value="3" />
+          <entry key="podspec" value="2" />
+          <entry key="properties" value="1" />
+          <entry key="swift" value="6" />
+          <entry key="yaml" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Dart" value="4" />
-          <entry key="Markdown" value="1" />
-          <entry key="ObjectiveC" value="2" />
-          <entry key="PLAIN_TEXT" value="3" />
-          <entry key="YAML" value="2" />
+          <entry key="Dart" value="13" />
+          <entry key="IDEA_MODULE" value="3" />
+          <entry key="JSON" value="1" />
+          <entry key="Kotlin" value="3" />
+          <entry key="Markdown" value="6" />
+          <entry key="ObjectiveC" value="6" />
+          <entry key="PLAIN_TEXT" value="25" />
+          <entry key="Properties" value="1" />
+          <entry key="YAML" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dart" value="10" />
+          <entry key="dart" value="198" />
           <entry key="swift" value="1" />
-          <entry key="yaml" value="2" />
+          <entry key="yaml" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Dart" value="10" />
+          <entry key="Dart" value="198" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="YAML" value="2" />
+          <entry key="YAML" value="4" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ios/Classes/SwiftWebVuwPlugin.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="8" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="10" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -97,6 +114,13 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>sdk</find>
+      <find>evaluateJavascript</find>
+      <find>evaluateJavaScript</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -104,22 +128,23 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ios/Classes/WebVuwPlugin.m" />
-        <option value="$PROJECT_DIR$/lib/web_vuw.dart" />
         <option value="$PROJECT_DIR$/example/test/widget_test.dart" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/example/lib/main.dart" />
-        <option value="$PROJECT_DIR$/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt" />
-        <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/test/plugin_test.dart" />
+        <option value="$PROJECT_DIR$/android/local.properties" />
+        <option value="$PROJECT_DIR$/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt" />
+        <option value="$PROJECT_DIR$/example/lib/popup_screen.dart" />
+        <option value="$PROJECT_DIR$/lib/web_vuw.dart" />
+        <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/ios/Classes/SwiftWebVuwPlugin.swift" />
+        <option value="$PROJECT_DIR$/pubspec.yaml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="656" />
     <option name="y" value="22" />
-    <option name="width" value="784" />
+    <option name="width" value="1440" />
     <option name="height" value="878" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -128,13 +153,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="web_vuw" type="b2602c69:ProjectViewProjectNode" />
               <item name="web_vuw" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="web_vuw" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web_vuw" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="web_vuw" type="b2602c69:ProjectViewProjectNode" />
@@ -158,20 +188,28 @@
               <item name="ios" type="462c0819:PsiDirectoryNode" />
               <item name="Classes" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="web_vuw" type="b2602c69:ProjectViewProjectNode" />
+              <item name="web_vuw" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
         <option name="show-excluded-files" value="false" />
       </pane>
-      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="m&#9;FILE&#9;file:///Users/DevFatani/Developer/Flutter-Apps/web_vuw/example/lib/main.dart" />
+    <property name="android.project.structure.last.selected" value="SDK Location" />
+    <property name="android.project.structure.proportion" value="0.15" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunDashboard">
@@ -220,9 +258,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="656" y="22" width="784" height="878" extended-state="0" />
+    <frame x="0" y="22" width="1440" height="878" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.4703504" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2553648" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -232,19 +270,19 @@
       <window_info id="Capture Tool" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5033829" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.5032765" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3276316" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3263434" />
       <window_info anchor="bottom" id="Dart Analysis" order="8" weight="0.32894737" />
       <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5007153" side_tool="true" weight="0.3276316" />
-      <window_info anchor="bottom" id="Logcat" order="11" weight="0.32894737" />
+      <window_info anchor="bottom" id="Logcat" order="11" weight="0.327654" />
       <window_info anchor="bottom" id="Version Control" order="12" />
       <window_info anchor="bottom" id="Flutter Performance" order="13" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="14" sideWeight="0.49928468" weight="0.32894737" />
+      <window_info active="true" anchor="bottom" id="Messages" order="14" sideWeight="0.49928468" visible="true" weight="0.327654" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -261,9 +299,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/example/ios/Podfile">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/example/ios/Runner/GeneratedPluginRegistrant.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -274,43 +309,84 @@
     <entry file="file://$PROJECT_DIR$/example/ios/Runner/GeneratedPluginRegistrant.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/bin/cache/dart-sdk/lib/async/async.dart">
+    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/bin/cache/dart-sdk/lib/async/async.dart" />
+    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/packages/flutter/lib/src/material/material.dart" />
+    <entry file="file://$PROJECT_DIR$/example/test/widget_test.dart" />
+    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/packages/flutter/lib/src/widgets/navigator.dart" />
+    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/packages/flutter/lib/src/material/app.dart" />
+    <entry file="file://$PROJECT_DIR$/test/plugin_test.dart" />
+    <entry file="file://$PROJECT_DIR$/android/local.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="50" selection-start-line="1" selection-start-column="50" selection-end-line="1" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Classes/WebVuwPlugin.h">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/packages/flutter/lib/src/material/material.dart">
+    <entry file="file://$PROJECT_DIR$/ios/Classes/WebVuwPlugin.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
+        <state relative-caret-position="15">
+          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example/test/widget_test.dart" />
-    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/packages/flutter/lib/src/widgets/navigator.dart">
+    <entry file="file://$PROJECT_DIR$/ios/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/web_vuw.podspec">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/ios/ServiceDefinitions.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/ios/Podfile.lock">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/ios/Podfile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="922" column="21" selection-start-line="922" selection-start-column="21" selection-end-line="922" selection-end-column="21" />
+        <state relative-caret-position="-151">
+          <caret column="16" selection-start-column="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../flutter-sdk-2/packages/flutter/lib/src/material/app.dart">
+    <entry file="file://$PROJECT_DIR$/example/.flutter-plugins">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/.metadata">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/.packages">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-547">
-          <caret line="92" column="13" selection-start-line="92" selection-start-column="13" selection-end-line="92" selection-end-column="13" />
+        <state relative-caret-position="240">
+          <caret line="16" column="21" lean-forward="true" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/pubspec.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-29" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21" />
+        <state relative-caret-position="-219" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web_vuw.iml">
+    <entry file="file://$PROJECT_DIR$/example/README.md">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.lock">
+    <entry file="file://$PROJECT_DIR$/example/web_vuw_example.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/LICENSE">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.packages">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
@@ -320,77 +396,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.packages">
+    <entry file="file://$PROJECT_DIR$/LICENSE">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/.metadata">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt">
+    <entry file="file://$PROJECT_DIR$/pubspec.lock">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
+        <state relative-caret-position="-1208">
+          <caret line="34" column="15" selection-start-line="34" selection-start-column="12" selection-end-line="34" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
+        <state relative-caret-position="61">
           <caret line="6" column="23" lean-forward="true" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ios/Classes/WebVuwPlugin.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="25" selection-start-line="1" selection-start-column="25" selection-end-line="1" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ios/Classes/WebVuwPlugin.h">
+    <entry file="file://$PROJECT_DIR$/web_vuw.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/.metadata">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/plugin_test.dart">
+    <entry file="file://$PROJECT_DIR$/android/src/main/kotlin/com/devfatani/webvuw/WebVuw.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="239">
+          <caret line="159" column="34" selection-start-line="159" selection-start-column="16" selection-end-line="159" selection-end-column="34" />
           <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-161">
-          <caret line="21" column="43" lean-forward="true" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#30#792#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/web_vuw.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2049">
-          <caret line="183" column="22" selection-start-line="183" selection-start-column="22" selection-end-line="183" selection-end-column="22" />
+        <state relative-caret-position="103">
+          <caret line="59" column="17" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ios/Classes/SwiftWebVuwPlugin.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="8" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="10" selection-end-column="20" />
+        <state relative-caret-position="140">
+          <caret line="169" column="30" selection-start-line="169" selection-start-column="30" selection-end-line="169" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/lib/popup_screen.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../flutter-sdk/packages/flutter/lib/src/material/ink_well.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="512" column="13" selection-start-line="512" selection-start-column="13" selection-end-line="512" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
         </state>
       </provider>
     </entry>
