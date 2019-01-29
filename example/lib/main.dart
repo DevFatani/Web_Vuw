@@ -59,11 +59,22 @@ class _ExampleState extends State<Example> {
                     icon: Icon(Icons.thumb_up),
                     onPressed: () {
                       popupScreen(PopupScreen(), context);
+                    }),
+                IconButton(
+                    icon: Icon(Icons.code),
+                    onPressed: () async {
+                      final controller = await _controller.future;
+                      await controller
+                          .loadHtml('<body><h1>this is web vuw</h1></body>');
                     })
               ]),
           body: WebVuw(
+//             to load web page url
             initialUrl: _loadUrl,
+            // to load html string
+//            html: '<body><h1>this is web vuw</h1></body>',
             enableJavascript: true,
+            pullToRefresh: false,
             userAgent: 'userAgent',
             gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
               Factory<OneSequenceGestureRecognizer>(
