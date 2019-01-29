@@ -11,6 +11,7 @@ enum FlutterMethodName: String {
     case stopLoading
     case evaluateJavascript
     case reload
+    case loadHtml
 }
 
 public class WebVuwFactory : NSObject, FlutterPlatformViewFactory {
@@ -44,6 +45,7 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     let WEB_VUW_EVENT = "web_vuw_events_%d"
     let EVENT = "event"
     let URL_ = "url"
+    let HTML = "html"
     let ENABLE_JAVA_SCRIPT = "enableJavascript"
     let ENABLE_LOCAL_STORAGE = "enableLocalStorage"
     
@@ -52,7 +54,7 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     fileprivate var viewId:Int64!;
     fileprivate var wkWebVuw: WKWebView!
     fileprivate var channel: FlutterMethodChannel!
-    fileprivate var refController: UIRefreshControl!
+    fileprivate var refController: UIRefreshControl?
     fileprivate var eventSinkNavigation: FlutterEventSink?;
     
     public init(withFrame frame: CGRect, viewIdentifier viewId: Int64, arguments args: Any?, binaryMessenger: FlutterBinaryMessenger) {
@@ -62,10 +64,10 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
             FlutterEventChannel.init(name: String(format: WEB_VUW_EVENT, viewId),
                                      binaryMessenger: binaryMessenger).setStreamHandler(self)
             
+            //TODO: need to refactor
+            self.refController = setPullToRefresh(args, wkWebVuw: initWebVuw)
             self.wkWebVuw = initWebVuw
-            self.refController = UIRefreshControl()
-            self.refController.addTarget(self, action:  #selector(reloadWebView), for: .valueChanged)
-            self.wkWebVuw.scrollView.addSubview(self.refController)
+            
             
             let channelName = String(format: CHANNEL_NAME, viewId)
             self.channel = FlutterMethodChannel(name: channelName, binaryMessenger: binaryMessenger)
@@ -80,35 +82,40 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
         }
     }
     
+    private func jsSettings(params: NSDictionary) -> WKWebViewConfiguration{
+        let enableJavascript =  params[ENABLE_JAVA_SCRIPT] as? Int ?? 0
+        let enableLocalStorage = params[ENABLE_LOCAL_STORAGE] as? Int ?? 0
+        
+        let preferences = WKPreferences()
+        let configuration = WKWebViewConfiguration()
+        preferences.javaScriptEnabled = enableJavascript == 1
+        
+        if #available(iOS 9.0, *), enableLocalStorage == 1{
+            configuration.websiteDataStore = WKWebsiteDataStore.default()
+        }
+        
+        configuration.preferences = preferences
+        
+        return configuration
+    }
+    
+    private func setPullToRefresh(_ args: Any?, wkWebVuw: WKWebView) -> UIRefreshControl?{
+        if let params = args as? NSDictionary {
+            let isPullToRefreshAllowed = params["pullToRefresh"] as? Int ?? 0
+            if isPullToRefreshAllowed == 1 {
+                let refController = UIRefreshControl()
+                refController.addTarget(self, action:  #selector(reloadWebView), for: .valueChanged)
+                wkWebVuw.scrollView.addSubview(refController)
+                return refController
+            }
+        }
+        return nil
+    }
+    
     private func initWebVuw (frame: CGRect, _ args: Any?) -> WKWebView? {
-        if let params = args as? NSDictionary ,
-            let initialURLString = params[INITIAL_URL] as? String {
+        if let params = args as? NSDictionary {
             
-            let initialURL = URL(string: initialURLString)!
-            var customRequest = URLRequest(url: initialURL)
-            
-            if let header = params[HEADER] as? NSDictionary {
-                for (key, value) in header {
-                    if let val = value as? String,
-                        let field = key as? String {
-                        customRequest.addValue(val, forHTTPHeaderField: field)
-                    }
-                }
-            }
-            
-            let enableJavascript =  params[ENABLE_JAVA_SCRIPT] as? Int ?? 0
-            let enableLocalStorage = params[ENABLE_LOCAL_STORAGE] as? Int ?? 0
-            
-            let preferences = WKPreferences()
-            let configuration = WKWebViewConfiguration()
-            preferences.javaScriptEnabled = enableJavascript == 1
-            if #available(iOS 9.0, *), enableLocalStorage == 1{
-                configuration.websiteDataStore = WKWebsiteDataStore.default()
-            }
-            
-            
-            configuration.preferences = preferences
-            let wkWebVuw = WKWebView(frame: frame, configuration: configuration)
+            let wkWebVuw = WKWebView(frame: frame, configuration: jsSettings(params: params))
             wkWebVuw.navigationDelegate = self
             wkWebVuw.scrollView.bounces = true
             
@@ -117,7 +124,23 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
                 wkWebVuw.customUserAgent = userAgent
             }
             
-            wkWebVuw.load(customRequest)
+            
+            if let initialURLString = params[INITIAL_URL] as? String ,
+                let initialURL = URL(string: initialURLString) {
+                var customRequest = URLRequest(url: initialURL)
+                
+                if let header = params[HEADER] as? NSDictionary {
+                    for (key, value) in header {
+                        if let val = value as? String,
+                            let field = key as? String {
+                            customRequest.addValue(val, forHTTPHeaderField: field)
+                        }
+                    }
+                }
+                wkWebVuw.load(customRequest)
+            }else if let html = params[HTML] as? String {
+                wkWebVuw.loadHTMLString(html, baseURL: nil)
+            }
             
             return wkWebVuw
         }
@@ -127,12 +150,12 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
     }
     
     public func view() -> UIView {
-        return self.wkWebVuw
+        return wkWebVuw
     }
     
     @objc func reloadWebView(){
-        self.refController.endRefreshing()
-        self.wkWebVuw.reload()
+        refController?.endRefreshing()
+        wkWebVuw.reload()
     }
     
     
@@ -152,20 +175,28 @@ public class WebVuwController: NSObject, FlutterPlatformView, FlutterStreamHandl
             case .stopLoading:
                 onStopLoading(call, result)
             case .evaluateJavascript:
-               onEvaluateJavascript(call, result)
+                onEvaluateJavascript(call, result)
             case .reload:
                 reload(call, result)
+            case .loadHtml:
+                onLoadHTML(call, result)
             }
         }
     }
     
+    
+    func onLoadHTML (_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
+        if let html = call.arguments as? String  {
+            wkWebVuw.loadHTMLString(html, baseURL: nil)
+        }
+    }
     
     func onEvaluateJavascript(_ call: FlutterMethodCall, _ result: @escaping FlutterResult) {
         if let jsString = call.arguments as? String  {
             wkWebVuw.evaluateJavaScript(jsString) { (evaluateResult, error) in
                 if error != nil {
                     result(FlutterError(code: "javascribt_faild", message: "Failed evaluating JavaScript Code.", details: "Your [js code] was: \(jsString)"))
-
+                    
                 }else if let res =  evaluateResult as? String {
                     result(res)
                 }

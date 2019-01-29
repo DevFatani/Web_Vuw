@@ -60,6 +60,11 @@ class WebVuwController {
     return result;
   }
 
+  Future<void> loadHtml(String html) async {
+    final result = await _channel.invokeMethod('loadHtml', html);
+    return result;
+  }
+
   Future<void> _updateSettings(Map<String, dynamic> update) async {
     return _channel.invokeMethod('updateSettings', update);
   }
@@ -70,17 +75,19 @@ class WebVuwController {
 }
 
 class WebVuw extends StatefulWidget {
-  const WebVuw({
-    Key key,
-    this.onWebViewCreated,
-    this.initialUrl,
-    this.header,
-    this.enableJavascript,
-    this.enableLocalStorage = false,
-    this.userAgent,
-    this.javaScriptMode = JavaScriptMode.disabled,
-    this.gestureRecognizers,
-  })  : assert(javaScriptMode != null),
+  const WebVuw(
+      {Key key,
+      this.onWebViewCreated,
+      this.initialUrl,
+      this.header,
+      this.enableJavascript,
+      this.enableLocalStorage = false,
+      this.userAgent,
+      this.javaScriptMode = JavaScriptMode.disabled,
+      this.gestureRecognizers,
+      this.html,
+      this.pullToRefresh})
+      : assert(javaScriptMode != null),
         super(key: key);
 
   final WebViewCreatedCallback onWebViewCreated;
@@ -91,6 +98,8 @@ class WebVuw extends StatefulWidget {
   final bool enableJavascript;
   final bool enableLocalStorage;
   final String initialUrl;
+  final String html;
+  final bool pullToRefresh;
 
   final JavaScriptMode javaScriptMode;
 
@@ -197,7 +206,9 @@ class _CreationParams {
       this.enableJavascript,
       this.enableLocalStorage,
       this.userAgent,
-      this.settings});
+      this.settings,
+      this.html,
+      this.pullToRefresh});
 
   static _CreationParams fromWidget(WebVuw widget) {
     return _CreationParams(
@@ -206,7 +217,9 @@ class _CreationParams {
         enableJavascript: widget.enableJavascript,
         enableLocalStorage: widget.enableLocalStorage,
         userAgent: widget.userAgent,
-        settings: _WebSettings.fromWidget(widget));
+        settings: _WebSettings.fromWidget(widget),
+        html: widget.html,
+        pullToRefresh: widget.pullToRefresh);
   }
 
   final String initialUrl;
@@ -215,6 +228,8 @@ class _CreationParams {
   final bool enableLocalStorage;
   final _WebSettings settings;
   final String userAgent;
+  final String html;
+  final bool pullToRefresh;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -224,6 +239,8 @@ class _CreationParams {
       'enableLocalStorage': enableLocalStorage,
       'userAgent': userAgent,
       'settings': settings.toMap(),
+      'html': html,
+      'pullToRefresh': pullToRefresh
     };
   }
 }
