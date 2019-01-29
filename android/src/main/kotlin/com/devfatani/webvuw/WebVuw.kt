@@ -29,7 +29,8 @@ enum class FlutterMethodName {
     goForward,
     stopLoading,
     evaluateJavascript,
-    reload
+    reload,
+    loadHtml
 }
 
 class WebVuw internal constructor(
@@ -53,22 +54,24 @@ class WebVuw internal constructor(
         const val WEB_VUW_EVENT = "web_vuw_events_"
         const val EVENT = "event"
         const val URL = "url"
+        const val HTML = "html"
+        const val PULL_TO_REFRESH = "pullToRefresh"
         const val ENABLE_JAVA_SCRIPT = "enableJavascript"
         const val ENABLE_LOCAL_STORAGE = "enableLocalStorage"
     }
 
+    private var isPullToRefreshAllowed = false
     private val linearLay = LinearLayout(context)
 
-    private val swipeRefresh: SwipeRefreshLayout = SwipeRefreshLayout(context)
+    private var swipeRefresh: SwipeRefreshLayout? = null
     private val webVuw: WebView = WebView(context)
     private val methodChannel: MethodChannel
 
     private var eventSinkNavigation: EventChannel.EventSink? = null
 
     init {
-        if (params.containsKey(INITIAL_URL)) {
+        if (params[INITIAL_URL] != null) {
             val initialURL = params[INITIAL_URL] as String
-
 
             if (params[HEADER] != null) {
                 val header = params[HEADER] as Map<String, String>
@@ -80,68 +83,86 @@ class WebVuw internal constructor(
                 webVuw.settings.userAgentString = userAgent
             }
 
+        } else if (params[HTML] != null) {
+            val html = params[HTML] as String
+            webVuw.loadDataWithBaseURL("", html, "text/html", "UTF-8", "")
+        }
 
-            val isJavaScriptEnabled = params[ENABLE_JAVA_SCRIPT] as Boolean
-            val isLocalStorageEnabled = params[ENABLE_LOCAL_STORAGE] as Boolean
-            webVuw.settings.javaScriptEnabled = isJavaScriptEnabled
-            webVuw.settings.domStorageEnabled = isLocalStorageEnabled
+        jsSettings(params)
 
-            val self = this@WebVuw
-            webVuw.webViewClient = object : WebViewClient() {
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    super.onPageStarted(view, url, favicon)
-                    if (self.eventSinkNavigation != null && url != null) {
-                        val result = HashMap<String, String>().apply {
-                            put(EVENT, "onPageStarted")
-                            put(URL, url)
-                        }
-                        self.eventSinkNavigation!!.success(result)
+        val self = this@WebVuw
+        webVuw.webViewClient = object : WebViewClient() {
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                if (self.eventSinkNavigation != null && url != null) {
+                    val result = HashMap<String, String>().apply {
+                        put(EVENT, "onPageStarted")
+                        put(URL, url)
                     }
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    super.onPageFinished(view, url)
-                    if (self.eventSinkNavigation != null && url != null) {
-                        val result = HashMap<String, String>().apply {
-                            put(EVENT, "onPageFinished")
-                            put(URL, url)
-                        }
-                        self.eventSinkNavigation!!.success(result)
-                    }
-                }
-
-                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-                override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
-                    if (request != null && self.eventSinkNavigation != null) {
-                        val nxtUrl = request.url.toString()
-                        val result = HashMap<String, String>().apply {
-                            put(EVENT, "shouldOverrideUrlLoading")
-                            put(URL, nxtUrl)
-                        }
-                        self.eventSinkNavigation!!.success(result)
-                    }
-                    return super.shouldOverrideUrlLoading(view, request)
+                    self.eventSinkNavigation!!.success(result)
                 }
             }
 
-            linearLay.orientation = LinearLayout.VERTICAL
-            swipeRefresh.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT)
-            webVuw.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.MATCH_PARENT)
-            linearLay.addView(swipeRefresh)
-            swipeRefresh.addView(webVuw)
-            swipeRefresh.setOnRefreshListener(this@WebVuw)
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                if (self.eventSinkNavigation != null && url != null) {
+                    val result = HashMap<String, String>().apply {
+                        put(EVENT, "onPageFinished")
+                        put(URL, url)
+                    }
+                    self.eventSinkNavigation!!.success(result)
+                }
+            }
 
-            EventChannel(messenger, "$WEB_VUW_EVENT$id").setStreamHandler(this@WebVuw)
+            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+            override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+                if (request != null && self.eventSinkNavigation != null) {
+                    val nxtUrl = request.url.toString()
+                    val result = HashMap<String, String>().apply {
+                        put(EVENT, "shouldOverrideUrlLoading")
+                        put(URL, nxtUrl)
+                    }
+                    self.eventSinkNavigation!!.success(result)
+                }
+                return super.shouldOverrideUrlLoading(view, request)
+            }
         }
+
+
+        if (params[PULL_TO_REFRESH] != null) {
+            val pullToRefresh = params[PULL_TO_REFRESH] as Boolean
+            if (pullToRefresh) {
+                isPullToRefreshAllowed = true
+                val swipeRefresh = SwipeRefreshLayout(context)
+                linearLay.orientation = LinearLayout.VERTICAL
+                swipeRefresh.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT)
+                webVuw.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT)
+                linearLay.addView(swipeRefresh)
+                swipeRefresh.addView(webVuw)
+                swipeRefresh.setOnRefreshListener(this@WebVuw)
+                self.swipeRefresh = swipeRefresh;
+            }
+        }
+
+        EventChannel(messenger, "$WEB_VUW_EVENT$id").setStreamHandler(this@WebVuw)
+
 
         methodChannel = MethodChannel(messenger, "$CHANNEL_NAME$id")
         methodChannel.setMethodCallHandler(this@WebVuw)
     }
 
+    private fun jsSettings(params: Map<*, *>) {
+        val isJavaScriptEnabled = params[ENABLE_JAVA_SCRIPT] as Boolean
+        val isLocalStorageEnabled = params[ENABLE_LOCAL_STORAGE] as Boolean
+        webVuw.settings.javaScriptEnabled = isJavaScriptEnabled
+        webVuw.settings.domStorageEnabled = isLocalStorageEnabled
+
+    }
+
     override fun getView(): View {
-        return linearLay
+        return if (isPullToRefreshAllowed) linearLay else webVuw
     }
 
     override fun onMethodCall(methodCall: MethodCall, result: Result) {
@@ -154,7 +175,15 @@ class WebVuw internal constructor(
             FlutterMethodName.stopLoading -> stopLoading(methodCall, result)
             FlutterMethodName.evaluateJavascript -> evaluateJavaScript(methodCall, result)
             FlutterMethodName.reload -> reload(methodCall, result)
+            FlutterMethodName.loadHtml -> loadHtml(methodCall, result)
         }
+    }
+
+    private fun loadHtml(methodCall: MethodCall, result: Result) {
+        (methodCall.arguments as String).let { html ->
+            webVuw.loadDataWithBaseURL("", html, "text/html", "UTF-8", "");
+        }
+
     }
 
     private fun evaluateJavaScript(methodCall: MethodCall, result: Result) {
@@ -203,7 +232,7 @@ class WebVuw internal constructor(
 
     override fun onRefresh() {
         webVuw.reload()
-        swipeRefresh.isRefreshing = false
+        swipeRefresh?.isRefreshing = false
     }
 
     override fun dispose() {}
@@ -211,6 +240,7 @@ class WebVuw internal constructor(
     override fun onListen(args: Any?, event: EventChannel.EventSink?) {
         eventSinkNavigation = event
     }
+
 
     override fun onCancel(p0: Any?) {
 
