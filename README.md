@@ -12,11 +12,12 @@
 
 > support
    > * Can embedded in widget tree ✅
-   > * Pull to refresh ✅
+   > * Pull to refresh (true / false) ✅
    > * Add header ✅
    > * Add userAgent ✅
    > * Can handl all webview callback method ✅
    > * Can call evaluateJavascript ✅
+   > * Can load HTML ✅
 
 
 # Demo
@@ -43,10 +44,13 @@ See Full example in [example](https://github.com/DevFatani/Web_Vuw/blob/master/e
     new WebVuw(
         initialUrl: 'www.url.com',
         enableJavascript: true,
+        pullToRefresh: true,
         header: {
             .....
         }
         userAgent: 'userAgent',
+        // to load html string
+        // html: '<body><h1>this is web vuw</h1></body>',
         gestureRecognizers: <Factory<OneSequenceGestureRecognizer>>[
             Factory<OneSequenceGestureRecognizer>(
                 () => EagerGestureRecognizer(),
@@ -130,6 +134,10 @@ Future<void> forward();
 
 ```dart
 Future<dynamic> evaluateJavascript(String javascriptString);
+```
+
+```dart
+ Future<void> loadHtml(String html);
 ```
 
 ```dart
