@@ -3,7 +3,6 @@ package com.devfatani.webvuw
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
-import android.support.annotation.RequiresApi
 import android.view.View
 import android.webkit.WebView
 import io.flutter.plugin.common.BinaryMessenger
@@ -12,12 +11,12 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.platform.PlatformView
-import android.support.v4.widget.SwipeRefreshLayout
 import android.view.ViewGroup
-import android.webkit.ValueCallback
 import android.webkit.WebResourceRequest
 import android.webkit.WebViewClient
 import android.widget.LinearLayout
+import androidx.annotation.RequiresApi
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import io.flutter.plugin.common.EventChannel
 
 
